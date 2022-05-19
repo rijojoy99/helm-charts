@@ -1,0 +1,42 @@
+
+cat startup.sh
+#!/bin/sh
+eksctl utils write-kubeconfig --cluster microk8s
+kubectl config set-context --current --namespace default
+
+karpenter.sh for cert management
+
+
+Create Ingress taking following inputs into consideration.
+
+URL: <user-id>-app.brainupgrade.net
+SVC: hello
+Port: 80
+Class: nginx
+
+Name of the ingress should be app
+
+
+Reference:
+k create ingress app   --rule="klaas2205u1-app.brainupgrade.net/?(.*)=svc:80,tls=secr8t" --class nginx --annotation=cert-manager.io/cluster-issuer=letsencrypt-prod --annotation=nginx.ingress.kubernetes.io/rewrite-target=/\$1
+
+https://klaas-grafana.brainupgrade.net
+Username: admin
+Password: lWZS1dGTIOL9v40QpFsNfDRJp3s8jkPjdxuP8foR
+
+https://klaas-kibana.brainupgrade.net/
+
+Username: microk8s@admin
+Password: trek@k2
+
+Login URL: https://cloudtech-training.signin.aws.amazon.com/console 
+Participant Username: microk8sAdmin   Password:  auhHmQsBqwoLj1
+To switch role on console https://signin.aws.amazon.com/switchrole?account=cloudtech-training&roleName=microk8sAdmin
+Switch region to ap-southeast-1 and choose EKS service (Elastic Kubernetes Service)
+
+
+https://github.com/brainupgrade-in/kubernetes/tree/main/observability
+
+Your business is running current app with 10 replicas
+Dev team has come up with new innovative feature and business team is keen on releasing new feature at the same time they want to ensure that if users don't like it they should be able to switch back to the earlier app version seamlessly (within no time)
+Use this code base to implement above business requirement - https://github.com/brainupgrade-in/dockerk8s/tree/main/kubernetes/lab/deployment/blueGreen
